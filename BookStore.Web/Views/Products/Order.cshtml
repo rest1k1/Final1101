@@ -1,0 +1,27 @@
+﻿@model BookStore.Web.Models.Product
+
+@{
+    ViewData["Title"] = "Товар добавлен";
+}
+
+<div class="message-container">
+
+    <h1>Товар добавлен в заказ</h1>
+
+    <div class="success-card">
+
+        <h2>@Model.Name</h2>
+
+        <p>
+            Цена: @Model.Price руб.
+        </p>
+
+    </div>
+
+    <a class="back-button"
+       asp-controller="Products"
+       asp-action="Index">
+        Назад к каталогу
+    </a>
+
+</div>

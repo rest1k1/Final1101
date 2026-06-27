@@ -1,0 +1,276 @@
+﻿<Window x:Class="BookStore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Книжный магазин"
+        Height="900"
+        Width="1600"
+        MinHeight="700"
+        MinWidth="1500"
+        WindowStartupLocation="CenterScreen"
+        Loaded="MainWindow_Loaded"
+        FontFamily="Calibri"
+        Icon="/Images/icon_win.ico">
+
+    <DockPanel Background="#FFFFFF">
+
+        <Border Background="#D89A1D"
+                DockPanel.Dock="Top">
+
+            <Grid Margin="20">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="240"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0"
+                       Source="{StaticResource icon}"
+                       VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Column="1"
+                           Text="Книжный магазин"
+                           FontFamily="Calibri"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+                
+                <StackPanel Grid.Column="2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+
+                    <TextBlock x:Name="UserNameText"
+                               HorizontalAlignment="Center"
+                               FontWeight="Bold"
+                               FontSize="13"
+                               Margin="0,0,0,8"
+                               TextWrapping="Wrap"
+                               MaxWidth="250"/>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+
+                        <Button x:Name="OrdersButton"
+                                Width="110"
+                                Height="30"
+                                Margin="0,0,10,0"
+                                Background="#B8860B"
+                                Foreground="#FFFFFF"
+                                Content="Заказы"
+                                Visibility="Collapsed"
+                                Click="OrdersButton_Click"
+                                TabIndex="9"/>
+
+                        <Button x:Name="LoginButton"
+                                TabIndex="7"
+                                Width="110"
+                                Height="30"
+                                Margin="0,0,10,0"
+                                Background="#B8860B"
+                                Foreground="#FFFFFF"
+                                Content="Войти"
+                                Click="LoginButton_Click"/>
+
+                        <Button x:Name="LogoutButton"
+                                TabIndex="8"
+                                Width="110"
+                                Height="30"
+                                Background="#B8860B"
+                                Foreground="#FFFFFF"
+                                Content="Выйти"
+                                Visibility="Collapsed"
+                                Click="Logout_Click"/>
+
+                    </StackPanel>
+                    
+                </StackPanel>
+
+            </Grid>
+
+        </Border>
+
+        <Grid Margin="15">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" 
+                    Padding="10"
+                    Margin="0,0,0,10"
+                    BorderBrush="#D89A1D"
+                    BorderThickness="1"
+                    CornerRadius="5">
+
+                <StackPanel >
+                    <TextBlock x:Name="CountText"  
+                                Margin="0,0,0,10"
+                                FontWeight="Bold"
+                                VerticalAlignment="Center" HorizontalAlignment="Left" />
+
+
+                    <WrapPanel VerticalAlignment="Center">
+
+                        <TextBlock Text="Поиск:"
+                                   VerticalAlignment="Center"/>
+
+                        <TextBox x:Name="SearchBox"
+                                 Width="180"
+                                 Margin="5"
+                                 TextChanged="SearchBox_TextChanged"
+                                 TabIndex="1"/>
+
+
+                        <TextBlock Text="Производитель:"
+                                   Margin="15,0,0,0"
+                                   VerticalAlignment="Center"/>
+
+                        <ComboBox x:Name="ManufacturerBox"
+                                  Width="180"
+                                  Margin="5"
+                                  SelectionChanged="ManufacturerBox_SelectionChanged"
+                                  TabIndex="2"/>
+
+                        <TextBlock Text="Цена от:"
+                                   Margin="15,0,0,0"
+                                   VerticalAlignment="Center"/>
+
+                        <TextBox x:Name="PriceFromBox"
+                                 Width="90"
+                                 Margin="5"
+                                 LostFocus="PriceBox_LostFocus"
+                                 TextChanged="PriceBox_TextChanged"    
+                                 TabIndex="3"/>
+
+                        <TextBlock Text="до:"
+                                   Margin="15,0,0,0"
+                                   VerticalAlignment="Center"/>
+
+                        <TextBox x:Name="PriceToBox"  
+                                 TabIndex="4"
+                                 Width="90"
+                                 Margin="5"
+                                 LostFocus="PriceBox_LostFocus"
+                                 TextChanged="PriceBox_TextChanged"/>
+
+                        <TextBlock Text="Сортировка:"
+                                   Margin="15,0,0,0"
+                                   VerticalAlignment="Center"/>
+
+                        <ComboBox x:Name="SortBox"
+                                  Width="180"
+                                  Margin="5"
+                                  SelectionChanged="SortBox_SelectionChanged"
+                                  TabIndex="5">
+
+                            <ComboBoxItem Content="Без сортировки"/>
+                            <ComboBoxItem Content="Название (А-Я)"/>
+                            <ComboBoxItem Content="Название (Я-А)"/>
+                            <ComboBoxItem Content="Цена (по возрастанию)"/>
+                            <ComboBoxItem Content="Цена (по убыванию)"/>
+
+                        </ComboBox>
+
+                        <Button x:Name="CartButton"
+                                Background="#B8860B" Foreground="#FFFFFF"
+                                Width="120" Visibility="Collapsed"
+                                Margin="5" Content="Корзина" 
+                                Click="CartButton_Click" TabIndex="6" Height="20"/>
+
+                    </WrapPanel>
+
+                </StackPanel>
+
+            </Border>
+
+            <TextBlock x:Name="EmptyText"
+                       Grid.Row="1"
+                       Text="Товары не найдены"
+                       Foreground="Red"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Visibility="Collapsed"/>
+
+            <ListView x:Name="ProductsList"
+                      Grid.Row="1"
+                      BorderThickness="0"
+                      HorizontalContentAlignment="Stretch"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                <ListView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Border Margin="5"
+                                Padding="10"
+                                BorderBrush="#D89A1D"
+                                BorderThickness="1"
+                                CornerRadius="5">
+
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="140"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0">
+
+                                    <TextBlock Text="{Binding Name}"
+                                               FontSize="22"                                              
+                                               FontWeight="Bold"
+                                               TextWrapping="Wrap"/>
+
+                                    <TextBlock Text="{Binding Description}"
+                                               Margin="0,10,0,10"
+                                               TextWrapping="Wrap"
+                                               MaxHeight="70"/>
+
+                                    <TextBlock Text="{Binding Manufacturer,
+                                               StringFormat=Производитель: {0}}"/>
+
+                                    <TextBlock Text="{Binding Price,
+                                               StringFormat=Цена: {0} ₽}"
+                                               FontWeight="Bold"/>
+
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1"                                           
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+
+                                    <Button Width="110"                                          
+                                            Height="40"
+                                            Content="Заказать"
+                                            TabIndex="10"
+                                            Background="#B8860B"
+                                            Foreground="#FFFFFF"
+                                            FontWeight="Bold"
+                                            Tag="{Binding}"
+                                            Click="OrderButton_Click"/>
+
+                                </StackPanel>
+
+                            </Grid>
+
+                        </Border>
+
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+        </Grid>
+
+    </DockPanel>
+
+</Window>

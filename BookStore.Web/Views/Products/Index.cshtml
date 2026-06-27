@@ -1,0 +1,42 @@
+﻿@model List<BookStore.Web.Models.Product>
+
+@{
+    ViewData["Title"] = "Каталог товаров";
+}
+
+<div class="page-container">
+
+    <h1 class="title">
+        Каталог товаров
+    </h1>
+
+    @foreach (BookStore.Web.Models.Product product in Model)
+    {
+        <div class="product-card">
+
+            <h2>@product.Name</h2>
+
+            <p class="description">
+                @product.Description
+            </p>
+
+            <p>
+                <strong>Производитель:</strong>
+                @product.Manufacturer
+            </p>
+
+            <p class="price">
+                Цена: @product.Price руб.
+            </p>
+
+            <a class="order-button"
+               asp-controller="Products"
+               asp-action="Order"
+               asp-route-id="@product.Id">
+                Заказать
+            </a>
+
+        </div>
+    }
+
+</div>

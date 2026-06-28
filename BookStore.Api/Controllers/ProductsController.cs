@@ -5,17 +5,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStoreApi.Controllers;
 
+/// <summary>
+/// Контроллер для управления товарами.
+/// Предоставляет методы для получения, создания,
+/// изменения и удаления товаров.
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
     private readonly AppDbContext _databaseContext;
 
+    /// <summary>
+    /// Инициализирует новый экземпляр контроллера товаров.
+    /// </summary>
     public ProductsController(AppDbContext databaseContext)
     {
         _databaseContext = databaseContext;
     }
 
+    /// <summary>
+    /// Получает список всех товаров.
+    /// </summary>
     [HttpGet]
     public async Task<IActionResult> Get()
     {
@@ -32,6 +43,9 @@ public class ProductsController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Получает товар по его идентификатору.
+    /// </summary>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -46,6 +60,9 @@ public class ProductsController : ControllerBase
         return Ok(product);
     }
 
+    /// <summary>
+    /// Создаёт новый товар.
+    /// </summary>
     [HttpPost]
     public async Task<IActionResult> Create(Product product)
     {
@@ -59,6 +76,9 @@ public class ProductsController : ControllerBase
             product);
     }
 
+    /// <summary>
+    /// Обновляет информацию о существующем товаре.
+    /// </summary>
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(
         int id,
@@ -76,6 +96,9 @@ public class ProductsController : ControllerBase
         return Ok(product);
     }
 
+    /// <summary>
+    /// Удаляет товар по его идентификатору.
+    /// </summary>
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {

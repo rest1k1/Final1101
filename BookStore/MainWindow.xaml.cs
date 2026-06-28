@@ -432,6 +432,12 @@ namespace BookStore
             UpdateOrdersButton();
         }
 
+        /// <summary>
+        /// Обрабатывает нажатие кнопки добавления товара в корзину.
+        /// Если товар уже присутствует в корзине, увеличивает его количество,
+        /// иначе добавляет новый элемент. После этого обновляет интерфейс
+        /// и сохраняет корзину для авторизованного пользователя.
+        /// </summary>
         private void OrderButton_Click(object sender, RoutedEventArgs e)
         {
             Button orderButton = (Button)sender;
@@ -521,6 +527,11 @@ namespace BookStore
                     : Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Проверяет корректность введённой цены после потери полем ввода фокуса.
+        /// Если значение не является числом, выводит сообщение об ошибке
+        /// и очищает поле ввода.
+        /// </summary>
         private void PriceBox_LostFocus(
             object sender,
             RoutedEventArgs e)
@@ -540,6 +551,12 @@ namespace BookStore
             }
         }
 
+        /// <summary>
+        /// Обрабатывает изменение текста в поле ввода цены.
+        /// Для поля минимальной цены проверяет, что введённое значение
+        /// не превышает максимально допустимую цену. После проверки
+        /// обновляет список отображаемых товаров.
+        /// </summary>
         private void PriceBox_TextChanged(
             object sender,
             TextChangedEventArgs e)

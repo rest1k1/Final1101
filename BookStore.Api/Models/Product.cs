@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 namespace BookStore.Api.Models;
 
+/// <summary>
+/// Представляет товар книжного магазина,
+/// хранящийся в базе данных.
+/// </summary>
 [Table("Products")]
 public class Product
 {
